@@ -1,8 +1,8 @@
-# Alex Jang, Joyce Lee, Brenden Smith
-# Prof. Li
-# Problem Solving and Software Design
+Alex Jang, Joyce Lee, Brenden Smith
+Prof. Li
+Problem Solving and Software Design
 
-**OIM3640 Project Proposal**
+# OIM3640 Project Proposal
 
 **1. The Big Idea:** 
 
