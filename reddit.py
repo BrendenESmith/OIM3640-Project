@@ -6,6 +6,7 @@ nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as sia
 from praw.models import MoreComments
 from pprint import pprint
+import statistics
 reddit_api = praw.Reddit(client_id=client_id,
                      client_secret=client_secret,
                      username="dingdingding3",
@@ -22,8 +23,10 @@ def reddit_posts(sub, num_of_posts):
         for first_comment in submission.comments:
             if isinstance(first_comment, MoreComments):
                 continue
+            # pprint(first_comment.body)
             commentsArray.append(first_comment.body)
         pprint(commentsArray[:5])
+<<<<<<< Updated upstream
         SIA = sia()
         results = []   
         for i in commentsArray:
@@ -36,6 +39,22 @@ def reddit_posts(sub, num_of_posts):
                 r_compound.append(value)
         print(r_compound)
 
+=======
+    SIA = sia()
+    compound_results = []   
+    for i in commentsArray:
+        r_score = SIA.polarity_scores(i)
+        # print(r_score)
+        # Identifying the compound score in each comment
+        compound_score = r_score["compound"]
+        # Making a list of all the compound scores
+        compound_results.append(compound_score)
+    # print(compound_results)
+    # Averaging the compound score list to find the average compound score across the comments
+    avg_comp_score = statistics.mean(compound_results)
+    print(avg_comp_score)
+    return avg_comp_score
+>>>>>>> Stashed changes
 # result = SentimentIntensityAnalyzer()
 # def nltk_sentiment(review, sub_entries_nltk):
 #     result1 = result.polarity_scores(review)
