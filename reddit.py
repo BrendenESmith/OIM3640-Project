@@ -24,12 +24,18 @@ def reddit_posts(sub, num_of_posts):
                 continue
             commentsArray.append(first_comment.body)
         pprint(commentsArray[:5])
-    SIA = sia()
-    results = []   
+        SIA = sia()
+        results = []   
         for i in commentsArray:
             r_score = SIA.polarity_scores(i)
             results.append(r_score)
         pprint(r_score,width=100)
+        r_compound = []
+        for key, value in r_score.items():
+            if key == "compound":
+                r_compound.append(value)
+        print(r_compound)
+
 # result = SentimentIntensityAnalyzer()
 # def nltk_sentiment(review, sub_entries_nltk):
 #     result1 = result.polarity_scores(review)
@@ -43,7 +49,7 @@ def main():
     topic = input("Please enter the subreddit you'd wish to search: ")
     num_of_posts = input("Please enter the number of submissions you would like to see: ")
     reddit_posts(topic, num_of_posts)
-    reddit_sentiment(commentsArray)
+    # reddit_sentiment(commentsArray)
 
 # def post_thread(f_comment,o_comment,sub_entries_textblob,sub_entries_nltk):
 #     if len(f_comment.replies)==0:
