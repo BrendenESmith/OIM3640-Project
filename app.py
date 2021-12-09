@@ -4,12 +4,18 @@ Flask application for Online Media Website Scraper. Provided a topic, returns ar
 
 from flask import Flask, render_template, request
 
+from twitter import tweet_sentiments
+
 app = Flask(__name__)
 
 @app.route("/", methods = ['POST','GET'])
 def index():
-    return render_template("homepage.html")
-
+    if request.method == 'POST':
+        ttopic = str(request.form["twitter_topic"])
+        tnumber = int(request.form["twitter_post_num"])
+        tresult = tweet_sentiments(ttopic,tnumber)
+        if tresult:
+            return render_template("results.html", ttopic = ttopic, tnumber = tnumber, tresult = tresult)
 
 if __name__ == "__main__":
     app.run(debug=True)
