@@ -4,9 +4,46 @@ import newspaper
 import string
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import requests
+from bs4 import BeautifulSoup
+import numpy as np
+import pandas as pd
+import time
 
 # Retrieve data as article1 using newspaper library
+def guardian_url_list():
+    req = requests.get("https://www.theguardian.com/uk")
+    req.status_code
 
+    frontpage = req.content
+    s = BeautifulSoup(frontpage, 'html5lib')
+    frontpage_articles = s.find_all('h3', class_='fc-item__title')
+    
+    url_list = []
+
+    for n in range(len(frontpage_articles)):  
+        if "live" in frontpage_articles[n].find('a')['href']:  
+            continue
+        
+        url = frontpage_articles[n].find('a')['href']
+        url_list.append(url)
+        
+    return url_list
+
+def dailymail_url_list():
+    req = requests.get("https://www.dailymail.co.uk")
+    req.status_code
+
+    frontpage = req.content
+    s = BeautifulSoup(frontpage, 'html5lib')
+    frontpage_articles = s.find_all('h2', class_='linkro-darkred')
+    
+    url_list = []
+    for n in range(len(frontpage_articles)):  
+        url = "https://www.dailymail.co.uk" + frontpage_articles[n].find('a')['href']
+        url_list.append(url)
+        
+    return url_list
 
 def retrieve_text_single(url1):
     article1 = Article(url1)
@@ -49,21 +86,24 @@ def analysis_top10_single(url1):
 def pull_related(keyword, source):
     related_papers = []
     # bring all the articles from the source
-    ny_paper = newspaper.build(source, memorize_articles=False)
-    for article in ny_paper.articles:
-        print(article.url)
-        top10_1 = analysis_top10_single(article.url)
+    for url in source:
+        top10_1 = analysis_top10_single(url)
+        top10_1 = [x.strip().lower() for x in top10_1]
         print(top10_1)
         # If keyword matches top10_1, it will be appended in the related_papers list
         if keyword in top10_1:
-            related_papers.append(article.url)
+            related_papers.append(url)
     return related_papers
 
 
 # Pulling the links of sources related to keyword
-def sentiment_analysis(source1, source2, keyword):
-    articles_1 = pull_related(keyword, source1)
-    articles_2 = pull_related(keyword, source2)
+def sentiment_analysis(keyword):
+    
+    guardian_urls = guardian_url_list()
+    dailymail_urls = dailymail_url_list()
+    
+    articles_1 = pull_related(keyword, guardian_urls)
+    articles_2 = pull_related(keyword, dailymail_urls)
     articles_list = [articles_1, articles_2]
 
     scores = [[], []]
@@ -71,6 +111,10 @@ def sentiment_analysis(source1, source2, keyword):
     for articles in articles_list:
         for url in articles:
             # retrieving data
+            try:
+                response = requests.get(url)
+            except requests.ConnectionError as exception:
+                continue
             article = retrieve_text_single(url)
             article.download()
             article.parse()
@@ -99,8 +143,4 @@ def sentiment_analysis(source1, source2, keyword):
 
     return avg
 
-# analysis_top10_single("https://nypost.com/")
-# analysis_top10_single("https://nypost.com/2021/10/22/rapper-einar-shot-dead-at-19-year-after-brutal-rival-gang-attack/")
-
-
-print(sentiment_analysis("https://nbcnews.com", "https://cnbc.com", "vaccine"))
+print(sentiment_analysis("covid"))
