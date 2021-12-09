@@ -5,6 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .text_inputs {
+            padding-right:40px;
+        }
+    </style>
+    <script>
+        function processForm()
+        {
+            var myform=document.getElementById("form1");
+            if (myform.twitter_topic.value=="")
+            {
+                alert("You must fill in all the entries")
+            }
+            return false;
+        }
+    </script>
 </head>
 <body>
     <h1>Web Scraper</h1>
@@ -15,6 +31,11 @@
         </p>
         <p>
             Please enter the number of posts you want returned: <input type="text" size="20" name="twitter_post_num" id = "twitter_post_num">
+        </p>
+        <p style="text-align:center">
+            <input type="submit" name="submit" value="Submit"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="reset" name="reset" value="Reset"/>
         </p>
 
 

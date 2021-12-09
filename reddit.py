@@ -19,27 +19,13 @@ def reddit_posts(sub, num_of_posts):
     commentsArray = []
     community = reddit_api.subreddit(sub).hot(limit= int(num_of_posts))
     for submission in community:
-        print(f'Title:{submission.title} \nby:{submission.author}\nupvotes: {submission.score}\ntotal comments: {submission.num_comments}\nurl: {submission.url}\n')
+        print(f'\n--------------------------------\nTitle: {submission.title}\n--------------------------------\nby: {submission.author}\nupvotes: {submission.score}\ntotal comments: {submission.num_comments}\n\n{submission.selftext}\n\nurl: {submission.url}\n')
         for first_comment in submission.comments:
             if isinstance(first_comment, MoreComments):
                 continue
-            # pprint(first_comment.body)
+                # pprint(first_comment.body)
             commentsArray.append(first_comment.body)
-        pprint(commentsArray[:5])
-<<<<<<< Updated upstream
-        SIA = sia()
-        results = []   
-        for i in commentsArray:
-            r_score = SIA.polarity_scores(i)
-            results.append(r_score)
-        pprint(r_score,width=100)
-        r_compound = []
-        for key, value in r_score.items():
-            if key == "compound":
-                r_compound.append(value)
-        print(r_compound)
-
-=======
+    pprint(commentsArray[:3])
     SIA = sia()
     compound_results = []   
     for i in commentsArray:
@@ -53,8 +39,7 @@ def reddit_posts(sub, num_of_posts):
     # Averaging the compound score list to find the average compound score across the comments
     avg_comp_score = statistics.mean(compound_results)
     print(avg_comp_score)
-    return avg_comp_score
->>>>>>> Stashed changes
+    print (f'average compound score: {avg_comp_score}')
 # result = SentimentIntensityAnalyzer()
 # def nltk_sentiment(review, sub_entries_nltk):
 #     result1 = result.polarity_scores(review)

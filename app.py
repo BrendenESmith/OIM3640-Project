@@ -16,6 +16,9 @@ def index():
         tresult = tweet_sentiments(ttopic,tnumber)
         if tresult:
             return render_template("results.html", ttopic = ttopic, tnumber = tnumber, tresult = tresult)
+        else:
+            return render_template("error.html", error=True)
+    return render_template("homepage.html", error=None)
 
 if __name__ == "__main__":
     app.run(debug=True)
