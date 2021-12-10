@@ -19,21 +19,26 @@ def reddit_posts(sub, num_of_posts):
                      password=password,
                      user_agent="user_agent")
     commentsArray = []
-    submissionArray = {}
+    # submissionArray = {}
     community = reddit_api.subreddit(sub).hot(limit= int(num_of_posts))
     for submission in community:
-        submissionArray[(f'\n--------------------------------\nTitle: {submission.title}\n--------------------------------\nby: {submission.author}\nupvotes: {submission.score}\ntotal comments: {submission.num_comments}\n\n{submission.selftext}\n\nurl: {submission.url}\n')]=None
+        print(f'\n--------------------------------\nTitle: {submission.title}\n--------------------------------\nby: {submission.author}\nupvotes: {submission.score}\ntotal comments: {submission.num_comments}\n\n{submission.selftext}\n\nurl: {submission.url}\n')
         
         submission.comments.replace_more(limit=0)
+        # pprint(submissionArray)
         # for comment in submission.comments.list():
         #     commentsArray[comment] = commentsArray.append(comment.body)
         # pprint(commentsArray)            
         # for rpost in submissionArray:
-
+        counter = 0
         for first_lvl_comment in submission.comments:
-            commentsArray.append(first_lvl_comment.body)
-    for key, value in zip(submissionArray,commentsArray):
-        print (key,value)
+            counter += 1
+            if counter > 3:
+                break
+            pprint(first_lvl_comment.body)
+            # commentsArray.append(first_lvl_comment.body)
+    # for key, value in zip(submissionArray,commentsArray):
+    #     print (key,value)
 
     # for key, value in zip()
                 # print(first_lvl_comment.body)
