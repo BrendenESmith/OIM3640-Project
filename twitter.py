@@ -48,6 +48,9 @@ def tweet_sentiments(topic, num_of_tweets):
     avg_compound_score = statistics.mean(tweet_list_compounds)
     return round(avg_compound_score, 4), tweet_dict
 
+
+
+
 def main():
     """
     Collects info from other function

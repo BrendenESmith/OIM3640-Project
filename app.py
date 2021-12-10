@@ -15,7 +15,7 @@ def index():
         tnumber = int(request.form["twitter_post_num"])
         tresult = tweet_sentiments(ttopic,tnumber)
         if tresult:
-            return render_template("results.html", ttopic = ttopic, tnumber = tnumber, tresult = tresult)
+            return render_template("result.html", ttopic = ttopic, tnumber = tnumber, tresult = tresult)
         else:
             return render_template("error.html", error=True)
     return render_template("homepage.html", error=None)

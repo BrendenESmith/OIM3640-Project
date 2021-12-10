@@ -2,21 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" 
-    
-    
-    
-    
-    ="IE=edge">
-    <meta name="viewport" 
-    
-    
-    
-    
-    ="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .div1 {
+            border-style: double none double none;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1>Results</h1>
+    <div class="div1">
+    <p>
+        You have searched for:
+    </p>
+    <p><a href="#Twitter">Twitter:</a></p>
+    <ul>
+        <li>Topic Input: "{{ttopic}}"</li>
+        <li># of Posts Input: "{{tnumber}}"</li>
+    </ul>
+    <p><a href="#Reddit">Reddit:</a></p>
+    <ul>
+        <li>Topic Input: "{{ttopic}}"</li>
+        <li># of Posts Input: "{{tnumber}}"</li>
+    </ul>
+    <p><a href="#News">News:</a></p>
+    <ul>
+        <li>Topic Input: "{{ttopic}}"</li>
+        <li># of Posts Input: "{{tnumber}}"</li>
+    </ul>
+    </div>
+    <p id="Twitter">Twitter:</p>
+    <div>
+        {{tresult}}
+    </div>
+    <p id="Reddit">Reddit:</p>
+    <div>
+
+    </div>
+    <p id="News">News:</p>
+    <div>
+
+    </div>
 </body>
 </html>
