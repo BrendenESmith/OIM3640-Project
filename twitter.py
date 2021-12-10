@@ -46,9 +46,14 @@ def tweet_sentiments(topic, num_of_tweets):
     
     tweet_dict = {user_key[i]: tweet_value[i] for i in range(len(user_key))}           
     avg_compound_score = statistics.mean(tweet_list_compounds)
-    return round(avg_compound_score, 4), tweet_dict
+    for i in tweet_dict:
+        print(f'User: {i}; Tweet: {tweet_dict[i]}') 
+      
+    return(f'Average Compound Score: {round(avg_compound_score,4)}\n{tweet_dict}')
 
+    # return round(avg_compound_score, 4), tweet_dict
 
+# tweet_sentiments("college",5)
 
 
 def main():

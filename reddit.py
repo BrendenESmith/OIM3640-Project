@@ -9,7 +9,7 @@ from pprint import pprint
 import statistics
 
                     
-def reddit_posts(sub, num_of_posts):
+def reddit_sentiments(sub, num_of_posts):
     """
     This function takes a user-entered topic and how many reddit posts they want to analyze. It returns the average compound score of the submissions from the sentiment analysis and the submission title, number of comments, submission author, submission url, and 5 comments. 
     """
@@ -32,10 +32,13 @@ def reddit_posts(sub, num_of_posts):
         # for rpost in submissionArray:
         counter = 0
         for first_lvl_comment in submission.comments:
+            commentsArray.append(first_lvl_comment.body)
             counter += 1
             if counter > 3:
+                
                 break
             pprint(first_lvl_comment.body)
+            
             # commentsArray.append(first_lvl_comment.body)
     # for key, value in zip(submissionArray,commentsArray):
     #     print (key,value)
@@ -64,14 +67,14 @@ def reddit_posts(sub, num_of_posts):
         r_score = SIA.polarity_scores(i)
         # print(r_score)
         # Identifying the compound score in each comment
-        # compound_score = r_score["compound"]
+        compound_score = r_score["compound"]
         # Making a list of all the compound scores
-        # compound_results.append(compound_score)
+        compound_results.append(compound_score)
     # print(compound_results)
     # Averaging the compound score list to find the average compound score across the comments
-    # avg_comp_score = statistics.mean(compound_results)
+    avg_comp_score = statistics.mean(compound_results)
     # print(avg_comp_score)
-    # print (f'average compound score: {avg_comp_score}')
+    return (f'Average Compound Score: {avg_comp_score}')
 
 
         
@@ -81,7 +84,7 @@ def reddit_posts(sub, num_of_posts):
 def main():
     topic = input("Please enter the subreddit you'd wish to search: ")
     num_of_posts = input("Please enter the number of submissions you would like to see: ")
-    reddit_posts(topic, num_of_posts)
+    reddit_sentiments(topic, num_of_posts)
     # reddit_sentiment(commentsArray)
 
 
