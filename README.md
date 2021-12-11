@@ -22,3 +22,4 @@ Additionally, users will have to obtain API credentials from Twitter and Reddit 
 
 NOTE: In this repository are Python files of "news.py" and "gd.py." These are code that scrapes stories from The Guardian and The Daily Mail and seeks nouns in the article that match a desired key word before running sentiment analysis. While we planned on including this in our project, the code is very intensive and took too long to run (upwards of 10-15 minutes)
 
+Visit our [Google Site](https://sites.google.com/babson.edu/newsevaluator/home) to learn more about our project. 
