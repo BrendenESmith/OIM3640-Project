@@ -3,7 +3,7 @@ import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import statistics
 import pprint
-
+import json
 
 def tweet_sentiments(topic, num_of_tweets):
     """This function takes a user-entered topic and how many tweets they'd like to analyze. It returns and average
@@ -49,9 +49,9 @@ def tweet_sentiments(topic, num_of_tweets):
     for i in tweet_dict:
         print(f'User: {i}; Tweet: {tweet_dict[i]}') 
       
-    return(f'Average Compound Score: {round(avg_compound_score,4)}\n{tweet_dict}')
+    
 
-    # return round(avg_compound_score, 4), tweet_dict
+    return (round(avg_compound_score, 4), tweet_dict)
 
 # tweet_sentiments("college",5)
 

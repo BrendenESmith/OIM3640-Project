@@ -27,92 +27,52 @@ def reddit_sentiments(sub, num_of_posts):
         submission.comments.replace_more(limit=0)
         # Turns each submission into a dictionary key with None as value
         # print(reddit_dict)
-        # Prints out comment from one submission    
+        # Prints out three comments from one submission    
         counter = 0
-        
+        new_list = []
+        reddit_dict[rkey] = new_list
         for first_lvl_comment in submission.comments:
             commentsArray.append(first_lvl_comment.body)
             counter += 1
             if counter > 3:
                 break
             pprint(first_lvl_comment.body)            
-            reddit_dict[rkey]=first_lvl_comment.body
+        
+
+        # print(reddit_dict)
+        counter5 = 0
+        for i in commentsArray:
+            reddit_dict[rkey]=new_list.append(i)
+            counter5 += 1
+            if counter5 > 3:
+                reddit_dict[rkey+1]=new_list.append(i)
+                counter5 = 0
+            else:
+                break
 
         print(reddit_dict)
 
-
     #     comment_list = []
     #     counter3 = 0
-    #     counter4 = 0
     #     # for z in commentsArray():
-    #     for y in range(int(num_of_posts)):
-    #         if counter3 <= int(num_of_posts):
-    #             comment_list.append([])
-    #             counter3 += 1
-    #         else:
-    #             break
+    # for y in range(int(num_of_posts)):
+    #     if counter3 <= int(num_of_posts):
+    #         comment_list.append([])
+    #         counter3 += 1
+    #     else:
+    #         break
+    # # print(comment_list)
 
-    # for rlist in comment_list:        
-    #     for first_lvl_comment in submission.comments:
-    #         if counter4 <= 3:
-    #             commentsArray.append(first_lvl_comment.body)                
-    #             rlist.append((first_lvl_comment.body))
-    #             counter4 += 1 
-    #         else:
-    #             break
+    #     counter4 = 0
+    #     for rlist in comment_list:        
+    #         for i in commentsArray:
+    #             if counter4 <= 3:
+    #                 rlist.append((first_lvl_comment.body))
+    #                 counter4 += 1 
+    #             else:
+    #                 break
+    # print(comment_list)
 
-    # print(rlist)
-        # for i in commentsArray:
-        #     if counter4 <= 3: 
-
-
-            # print(comment_list)
-    #     for i in reddit_dict.keys():
-    #         reddit_dict[i]=comment_list.append(commentsArray[counter2])
-    #         reddit_dict[i]=comment_list.append(commentsArray[counter2+1])
-    #         reddit_dict[i]=comment_list.append(commentsArray[counter2+3])
-    #         counter2+=3
-
-    # print(reddit_dict)
-
-
-        #         reddit_dict[i]=()
-
-    # mynum = 1
-    # counter2 = 0
-    # while mynum <= int(num_of_posts): 
-    #     mylist = []
-    #     mylist.append(commentsArray[counter2])
-    #     mylist.append(commentsArray[counter2+1])
-    #     mylist.append(commentsArray[counter2+2])
-    #     reddit_dict[rkey]=mylist
-    #     counter2 += 3
-        
-        
-        # print (reddit_dict)
-
- 
-        
-
-
-    # for key, value in zip()
-                # print(first_lvl_comment.body)
-            #     submissionArray[rpost] = first_lvl_comment.body
-            # pprint(submissionArray)
-        #     for second_lvl_comment in first_lvl_comment.replies:
-        #     if isinstance(first_comment, MoreComments):
-        #     commentsArray.append(first_comment.body)
-        #         print(second_lvl_comment.body)
-        #         continue
-            # pprint(first_lvl_comment.body)
-
-        # pprint(commentsArray[:3])
-    #     for first_comment in submission.comments:
-    #         if isinstance(first_comment, MoreComments):
-    #             # continue
-    #             # pprint(first_comment.body)
-    #             commentsArray.append(first_comment.body)
-    # pprint(commentsArray[:3])
     SIA = sia()
     compound_results = []   
     for i in commentsArray:
@@ -126,17 +86,8 @@ def reddit_sentiments(sub, num_of_posts):
     # Averaging the compound score list to find the average compound score across the comments
     avg_comp_score = statistics.mean(compound_results)
     print(f'Average Compound Score: {avg_comp_score}')
-    return (round(avg_comp_score, 4), reddit_dict)
+    return (avg_comp_score, reddit_dict, commentsArray)
     
-# def compile(topic, num_of_posts):
-#     """
-#     pieces all the information together
-#     """
-#     try:
-#         if topic:
-#             return reddit_sentiments(topic,num_of_posts)
-#     except:
-#         print('sorry it did not work')
 
 
 

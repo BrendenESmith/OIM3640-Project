@@ -143,4 +143,12 @@ def sentiment_analysis(keyword):
 
     return avg
 
-print(sentiment_analysis("covid"))
+
+
+def main():
+    topic = input("Please enter the topic you'd wish to search: ")
+    # num_of_posts = input("Please enter the number of submissions you would like to see: ")
+    print(sentiment_analysis(topic))
+
+if __name__ == '__main__':
+    main()
