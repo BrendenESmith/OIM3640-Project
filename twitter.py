@@ -49,9 +49,9 @@ def tweet_sentiments(topic, num_of_tweets):
     for i in tweet_dict:
         print(f'User: {i}; Tweet: {tweet_dict[i]}') 
       
-    
 
     return (round(avg_compound_score, 4), tweet_dict)
+
 
 # tweet_sentiments("college",5)
 

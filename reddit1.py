@@ -86,7 +86,14 @@ def reddit_sentiments(sub, num_of_posts):
     # Averaging the compound score list to find the average compound score across the comments
     avg_comp_score = statistics.mean(compound_results)
     print(f'Average Compound Score: {avg_comp_score}')
-    return (avg_comp_score, reddit_dict, commentsArray)
+
+    try:
+        if reddit_dict:
+            return (round(avg_comp_score, 4), reddit_dict, commentsArray)
+        else:
+            return None
+    except:
+        print('Please try again')
     
 
 
